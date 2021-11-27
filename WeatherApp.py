@@ -8,21 +8,26 @@ Width = 500
 
 
 def get_icon(weather):
-    temp = (weather['main']['temp'])
+    try:
+        temp = (weather['main']['temp'])
 
-    if (temp > 30):
-        icon_url = 'https://img.icons8.com/color/96/000000/hot.png'
-    elif (temp > 20):
-        icon_url = 'https://img.icons8.com/color/96/000000/temperature.png'
-    elif (temp > 10):
-        icon_url = 'https://img.icons8.com/color/96/000000/temperature.png'
-    elif (temp > 0):
-        icon_url = 'https://img.icons8.com/color/96/000000/cold.png'
-    else:
-        icon_url = 'https://img.icons8.com/color/96/000000/cold.png'
+        if (temp > 30):
+            icon_url = 'https://img.icons8.com/color/96/000000/hot.png'
+        elif (temp > 20):
+            icon_url = 'https://img.icons8.com/color/96/000000/temperature.png'
+        elif (temp > 10):
+            icon_url = 'https://img.icons8.com/color/96/000000/temperature.png'
+        elif (temp > 0):
+            icon_url = 'https://img.icons8.com/color/96/000000/cold.png'
+        else:
+            icon_url = 'https://img.icons8.com/color/96/000000/cold.png'
 
-    iconurl = requests.get(icon_url)
-    icon_image = ImageTk.PhotoImage(Image.open(BytesIO(iconurl.content)))
+        iconurl = requests.get(icon_url)
+        icon_image = ImageTk.PhotoImage(Image.open(BytesIO(iconurl.content)))
+    except:
+        icon_url = 'https://img.icons8.com/color/96/000000/error--v1.png'
+        iconurl = requests.get(icon_url)
+        icon_image = ImageTk.PhotoImage(Image.open(BytesIO(iconurl.content)))
     return icon_image
 
 
